@@ -1,18 +1,14 @@
 //
-//  UIScrollView+EmptyDataSet.m
-//  DZNEmptyDataSet
-//  https://github.com/dzenbot/DZNEmptyDataSet
+//  UIScrollView+MHEmptyView.m
+//  foo
 //
-//  Created by Ignacio Romero Zurbuchen on 6/20/14.
-//  Copyright (c) 2016 DZN Labs. All rights reserved.
-//  Licence: MIT-Licence
+//  Created by J on 2017/5/31.
+//  Copyright © 2017年 J. All rights reserved.
 //
 
-#import "UIScrollView+EmptyDataSet.h"
+#import "UIScrollView+MHEmptyView.h"
 #import <objc/runtime.h>
-
-@interface UIView (DZNConstraintBasedLayoutExtensions)
-
+@interface UIView(DZNConstraintBasedLayoutExtensions)
 - (NSLayoutConstraint *)equallyRelatedConstraintWithView:(UIView *)view attribute:(NSLayoutAttribute)attribute;
 
 @end
@@ -24,6 +20,7 @@
 - (instancetype)initWithWeakObject:(id)object;
 
 @end
+
 
 @interface DZNEmptyDataSetView : UIView
 
@@ -45,7 +42,6 @@
 
 @end
 
-
 #pragma mark - UIScrollView+EmptyDataSet
 
 static char const * const kEmptyDataSetSource =     "emptyDataSetSource";
@@ -54,11 +50,13 @@ static char const * const kEmptyDataSetView =       "emptyDataSetView";
 
 #define kEmptyImageViewAnimationKey @"com.dzn.emptyDataSet.imageViewAnimation"
 
-@interface UIScrollView () <UIGestureRecognizerDelegate>
+
+
+@interface UIScrollView ()<UIGestureRecognizerDelegate>
 @property (nonatomic, readonly) DZNEmptyDataSetView *emptyDataSetView;
 @end
 
-@implementation UIScrollView (DZNEmptyDataSet)
+@implementation UIScrollView (MHEmptyView)
 
 #pragma mark - Getters (Public)
 
@@ -145,7 +143,7 @@ static char const * const kEmptyDataSetView =       "emptyDataSetView";
         
         UICollectionView *collectionView = (UICollectionView *)self;
         id <UICollectionViewDataSource> dataSource = collectionView.dataSource;
-
+        
         NSInteger sections = 1;
         
         if (dataSource && [dataSource respondsToSelector:@selector(numberOfSectionsInCollectionView:)]) {
@@ -541,7 +539,7 @@ static char const * const kEmptyDataSetView =       "emptyDataSetView";
         [view setupConstraints];
         
         [UIView performWithoutAnimation:^{
-            [view layoutIfNeeded];            
+            [view layoutIfNeeded];
         }];
         
         // Configure scroll permission
@@ -841,10 +839,10 @@ Class dzn_baseClassToSwizzleForTarget(id target)
         _button.accessibilityIdentifier = @"empty set button";
         
 #warning 注释
-//        _button.layer.borderWidth = 1.0;
-//        _button.layer.borderColor = [UIColor whiteColor].CGColor;
-//        _button.layer.cornerRadius=6.0;
-//        _button.clipsToBounds=YES;
+        //        _button.layer.borderWidth = 1.0;
+        //        _button.layer.borderColor = [UIColor whiteColor].CGColor;
+        //        _button.layer.cornerRadius=6.0;
+        //        _button.clipsToBounds=YES;
         
         [_button addTarget:self action:@selector(didTapButton:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -954,7 +952,7 @@ Class dzn_baseClassToSwizzleForTarget(id target)
         CGFloat width = CGRectGetWidth(self.frame) ? : CGRectGetWidth([UIScreen mainScreen].bounds);
 #warning 全局修改宽度
         CGFloat padding = roundf(width/16.0);
-
+        
         CGFloat verticalSpace = self.verticalSpace ? : 11.0; // Default is 11 pts
         
         NSMutableArray *subviewStrings = [NSMutableArray array];
@@ -963,7 +961,7 @@ Class dzn_baseClassToSwizzleForTarget(id target)
         NSMutableDictionary *metrics=[NSMutableDictionary dictionary];
         [metrics setObject:@(padding) forKey:@"padding"];
         
-//        NSDictionary *metrics = @{@"padding": @(padding)};
+        //        NSDictionary *metrics = @{@"padding": @(padding)};
         
         // Assign the image view's horizontal constraints
         if (_imageView.superview) {
@@ -1011,7 +1009,7 @@ Class dzn_baseClassToSwizzleForTarget(id target)
             views[[subviewStrings lastObject]] = _button;
             
 #warning 全局修改宽度
-
+            
             //缩小button的宽度
             CGFloat padding = roundf(width/5.0);
             
@@ -1019,7 +1017,7 @@ Class dzn_baseClassToSwizzleForTarget(id target)
             
             
             [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(padding@750)-[button(>=0)]-(padding@750)-|"
-                                        options:0 metrics:metrics views:views]];
+                                                                                     options:0 metrics:metrics views:views]];
             
         }
         // or removes from its superview
@@ -1068,8 +1066,6 @@ Class dzn_baseClassToSwizzleForTarget(id target)
 }
 
 @end
-
-
 #pragma mark - UIView+DZNConstraintBasedLayoutExtensions
 
 @implementation UIView (DZNConstraintBasedLayoutExtensions)
@@ -1101,3 +1097,6 @@ Class dzn_baseClassToSwizzleForTarget(id target)
 }
 
 @end
+
+
+

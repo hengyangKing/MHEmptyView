@@ -1,11 +1,9 @@
 //
-//  UIScrollView+EmptyDataSet.h
-//  DZNEmptyDataSet
-//  https://github.com/dzenbot/DZNEmptyDataSet
+//  UIScrollView+MHEmptyView.h
+//  foo
 //
-//  Created by Ignacio Romero Zurbuchen on 6/20/14.
-//  Copyright (c) 2016 DZN Labs. All rights reserved.
-//  Licence: MIT-Licence
+//  Created by J on 2017/5/31.
+//  Copyright © 2017年 J. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -15,11 +13,8 @@
 
 #define DZNEmptyDataSetDeprecated(instead) DEPRECATED_MSG_ATTRIBUTE(" Use " # instead " instead")
 
-/**
- A drop-in UITableView/UICollectionView superclass category for showing empty datasets whenever the view has no content to display.
- @discussion It will work automatically, by just conforming to DZNEmptyDataSetSource, and returning the data you want to show.
- */
-@interface UIScrollView (EmptyDataSet)
+
+@interface UIScrollView (MHEmptyView)
 
 /** The empty datasets data source. */
 @property (nonatomic, weak) IBOutlet id <DZNEmptyDataSetSource> emptyDataSetSource;
@@ -36,8 +31,8 @@
  */
 - (void)reloadEmptyDataSet;
 
-@end
 
+@end
 
 /**
  The object that acts as the data source of the empty datasets.
@@ -250,28 +245,28 @@
 
 /**
  Tells the delegate that the empty data set will appear.
-
+ 
  @param scrollView A scrollView subclass informing the delegate.
  */
 - (void)emptyDataSetWillAppear:(UIScrollView *)scrollView;
 
 /**
  Tells the delegate that the empty data set did appear.
-
+ 
  @param scrollView A scrollView subclass informing the delegate.
  */
 - (void)emptyDataSetDidAppear:(UIScrollView *)scrollView;
 
 /**
  Tells the delegate that the empty data set will disappear.
-
+ 
  @param scrollView A scrollView subclass informing the delegate.
  */
 - (void)emptyDataSetWillDisappear:(UIScrollView *)scrollView;
 
 /**
  Tells the delegate that the empty data set did disappear.
-
+ 
  @param scrollView A scrollView subclass informing the delegate.
  */
 - (void)emptyDataSetDidDisappear:(UIScrollView *)scrollView;
@@ -279,4 +274,9 @@
 @end
 
 #undef DZNEmptyDataSetDeprecated
+
+
+
+
+
 
